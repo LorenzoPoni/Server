@@ -7,24 +7,16 @@ const app = express();
 const PORT = 3000;
 
 const pageRoutes = require('./routes/pageroutes');
+const weatherRoutes = require('./routes/weather');
+const authRoutes = require('./routes/auth');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../../../frontend/public')));
 
 app.use('/', pageRoutes);
-
-
-
-app.post('/login', (req, res) => {
-    const { username, password } = req.body || {};
-
-    if (username === 'admin' && password === 'password') {
-        return res.send('credenziali corrette');
-    }
-
-    return res.send('credenziali errate');
-});
+app.use('/', weatherRoutes);
+app.use('/', authRoutes);
 
 
 app.listen(PORT, () => {

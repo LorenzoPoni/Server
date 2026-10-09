@@ -5,7 +5,7 @@ const fetch = require("node-fetch");// da installare npm install node-fetch@2 --
 
 exports.weatherController = async (req, res) => {
     const city = req.body.city;
-    const apiKey = "446e332294950ade2b0883908d551808";
+    const apiKey = "84369ce91e7861c5e7be8b30245920bf";
 
     try {
         const response = await fetch(
