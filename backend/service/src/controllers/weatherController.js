@@ -1,24 +1,24 @@
 //logica di gestione del post della pagine weather
 
-const fetch = require("node-fetch");// da installare npm install node-fetch@2 -->
+const fetch = require("node-fetch");
+const { getWeather } = require("../utils/apiClient");
+const { WEATHER_API_KEY } = require("../utils/constants");
+const { validateCity } = require("../utils/validatecity");
+// da installare npm install node-fetch@2 -->
 //fetch è una funzione che permette di fare richieste HTTP (GET, POST, PUT, DELETE) verso un server o un'API. nel caso non è nativo e va in...
 
 exports.weatherController = async (req, res) => {
     const city = req.body.city;
-    const apiKey = "84369ce91e7861c5e7be8b30245920bf";
+
+    if (!validateCity(city)) {
+        return res.json({ error: true, message: "Città non valida" });
+    }
 
     try {
-        const response = await fetch(
-            `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=it`
-        );
-
-        const data = await response.json();
+        const data = await getWeather(city, WEATHER_API_KEY);
 
         if (data.cod !== 200) {
-            return res.json({
-                error: true,
-                message: "Città non trovata"
-            });
+            return res.json({error: true, message: "Città non trovata"});
         }
 
         res.json({
