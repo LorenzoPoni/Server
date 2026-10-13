@@ -1,9 +1,10 @@
 document.getElementById("weather-form").addEventListener("submit", async function (event) {
     event.preventDefault();
 
-    const city = document.getElementById("city-input").value;
-    
-    const res = await fetch("/weather" , { 
+    const city = document.getElementById("city-input").value.trim();
+    const resultBox = document.getElementById("weather-result");
+
+    const res = await fetch("/weather", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -13,7 +14,17 @@ document.getElementById("weather-form").addEventListener("submit", async functio
 
     const data = await res.json();
 
-    document.getElementById("weather-result").innerHTML = `
+    if (data.error) {
+        resultBox.innerHTML = `
+            <div class="weather-response-box">
+                <p>${data.message}</p>
+            </div>
+        `;
+        resultBox.style.display = "block";
+        return;
+    }
+
+    resultBox.innerHTML = `
           <div class="weather-response-box">
                 <p>${data.city}</p>
                 <p>${data.description}</p>
@@ -22,6 +33,5 @@ document.getElementById("weather-form").addEventListener("submit", async functio
           </div>
     `;
 
- 
-    document.getElementById("weather-result").style.display = "block";
+    resultBox.style.display = "block";
 });
