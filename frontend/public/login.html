@@ -5,10 +5,20 @@
     <meta charset="UTF-8">
     <title>Login</title>
     <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/footer.css">
 </head>
 
 <body>
 
+    <div id="navbar"></div>
+
+    <script>
+        fetch("components/navbar.html")
+            .then(res => res.text())
+            .then(html => document.getElementById("navbar").innerHTML = html);
+    </script>
+    
     <div class="login-box">
         <h2>Login</h2>
         <form action="/login" method="POST">
@@ -18,6 +28,13 @@
         </form>
     </div>
 
+    <div id="footer"></div>
+
+    <script>
+        fetch("components/footer.html")
+            .then(res => res.text())
+            .then(html => document.getElementById("footer").innerHTML = html);
+    </script>
 </body>
 
 </html>
