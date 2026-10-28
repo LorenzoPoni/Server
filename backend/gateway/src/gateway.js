@@ -4,7 +4,11 @@ const config = require("../config/env");
 
 const app = express();
 
-app.use("api/v1/wanted", createProxyMiddleware({
+app.get('/', (req, res) => {
+    res.redirect('/api/v1/');
+});
+
+app.use("/api/v1/wanted", createProxyMiddleware({
     target: config.WANTED_SERVICE_URL,
     changeOrigin: true,
     pathRewrite: {
@@ -24,7 +28,7 @@ app.use("/api/v1", createProxyMiddleware({
     target: config.SERVICE_URL,
     changeOrigin: true,
     pathRewrite: {
-        '^api/v1': ''
+        '^/api/v1': ''
     }
 }));
 
