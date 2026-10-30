@@ -1,4 +1,28 @@
-/* Stili specifici per la scheda FBI; gli stili di base sono in weather.css. */
+/* Garantisce che il body occupi l'intera altezza dello schermo */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Forza l'altezza minima all'altezza della vista */
+}
+
+/* Il contenuto principale si espande per occupare lo spazio vuoto */
+main {
+    flex: 1 0 auto;
+    margin-bottom: 2rem; /* Spazio di sicurezza tra il contenuto e il footer */
+}
+
+/* Regolazione del footer */
+#footer {
+    flex-shrink: 0;
+    width: 100%;
+}
+
 .fbi-wrapper {
     padding: 24px 16px;
 }
