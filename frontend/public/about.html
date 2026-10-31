@@ -4,16 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <title>About</title>
-    <link rel="stylesheet" href="css/about.css">
-    <link rel="stylesheet" href="css/navbar.css">
-    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="/api/v1/css/about.css">
+    <link rel="stylesheet" href="/api/v1/css/navbar.css">
+    <link rel="stylesheet" href="/api/v1/css/footer.css">
 </head>
 
 <body>
     <div id="navbar"></div>
 
     <script>
-        fetch("components/navbar.html")
+        fetch("/api/v1/components/navbar.html")
             .then(res => res.text())
             .then(html => document.getElementById("navbar").innerHTML = html);
     </script>
@@ -29,7 +29,7 @@
     <div id="footer"></div>
 
     <script>
-        fetch("components/footer.html")
+        fetch("/api/v1/components/footer.html")
             .then(res => res.text())
             .then(html => document.getElementById("footer").innerHTML = html);
     </script>
