@@ -12,6 +12,7 @@ passport.use(
     async (accessToken, refreshToken, profile, done) => {
       try {
         const user = {
+          // restituzione dati all'utente
           googleId: profile.id,
           displayName: profile.displayName,
           email: profile.emails?.[0]?.value,

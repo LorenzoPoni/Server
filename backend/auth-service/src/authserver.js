@@ -7,12 +7,19 @@ const env = require("../config/env");
 const googleAuthRoutes = require("./routes/authRoutes");
 
 const app = express();
+app.set("trust proxy", 1);
 
 app.use(
   session({
-    secret: "super-secret-key",
+    secret: env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
+    cookie: {
+      httpOnly: true, // il JS del browser non può leggere il cookie
+      sameSite: "lax", // necessario per il ritorno da Google (navigazione top-level)
+      secure: env.NODE_ENV === "production", // solo HTTPS in produzione
+      maxAge: 1000*60*60*8 //8 ore
+    },
   })
 );
 
