@@ -5,20 +5,21 @@
     <meta charset="UTF-8">
     <title>Weather API</title>
 
-    <link rel="stylesheet" href="/api/v1/css/navbar.css">
-    <link rel="stylesheet" href="/api/v1/css/footer.css">
-    <link rel="stylesheet" href="/api/v1/css/weather.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/weather.css">
 </head>
 
 <body>
 
     <!-- NAVBAR -->
     <div id="navbar"></div>
-    <script>
-        fetch("/api/v1/components/navbar.html")
+    <!-- <script>
+        fetch("components/navbar.html")
             .then(res => res.text())
             .then(html => document.getElementById("navbar").innerHTML = html);
-    </script>
+    </script> -->
+    <script src="JS/navbar.js"></script>
 
     <!-- WEATHER CONTENT -->
     <div class="weather-wrapper">
@@ -27,7 +28,6 @@
             <h2>Weather API</h2>
             <p class="subtitle">Inserisci il nome della città per sapere le condizioni meteo</p>
 
-            <!-- <form id="weather-form" action="/weather" method="POST"> L'action weather e POST comunicavano con un endpoint (localhost:4000) che non esiste-->
             <form id="weather-form">
                 <input type="text" id="city-input" name="city" placeholder="Nome della città" required>
                 <button type="submit">Invia</button>
@@ -41,12 +41,13 @@
     </div>
     <!-- FOOTER -->
     <div id="footer"></div>
-    <script>
-        fetch("/api/v1/components/footer.html")
+    <!-- <script>
+        fetch("components/footer.html")
             .then(res => res.text())
             .then(html => document.getElementById("footer").innerHTML = html);
-    </script>
-    <script src="/api/v1/js/weather.js"></script>
+    </script> -->
+    <script src="JS/footer.js"></script>
+    <script src="JS/weather.js"></script>
 </body>
 
 </html>

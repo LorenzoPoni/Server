@@ -1,6 +1,6 @@
 const express = require("express");
 const passport = require("passport");
-const env = require("../../config/env");
+const config = require("../../config/env");
 
 const router = express.Router();
 
@@ -8,22 +8,22 @@ router.get(
   "/google",
   passport.authenticate("google", {
     scope: ["profile", "email"],
+    prompt: "select_account",
   })
 );
 
-router.get(
-  "/google/callback",
+// Google rimanda qui. Se il login riesce NON restituiamo il JSON di Google:
+// la sessione contiene già l'utente, quindi riportiamo il browser sul sito.
+// Sarà la navbar a chiedere /me per sapere chi è loggato.
+router.get("/google/callback",
   passport.authenticate("google", {
-    // failureRedirect: "/login",
-    failureRedirect: `${env.FRONTEND_URL}`,
+    //failureRedirect: "/login",
+    failureRedirect: `${config.FRONTEND_URL}`,
   }),
   (req, res) => {
-
     //console.log(req.user);
-
-    //res.send("Login Google completato");
     //res.json(req.user);
-    res.redirect(env.FRONTEND_URL);
+    res.redirect(config.FRONTEND_URL);
   }
 );
 
@@ -49,7 +49,7 @@ router.get("/logout", (req, res) => {
 
     req.session.destroy(() => {
       res.clearCookie("connect.sid");
-      res.redirect(env.FRONTEND_URL);
+      res.redirect(config.FRONTEND_URL);
     });
   });
 });
